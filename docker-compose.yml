@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    
+  backend:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    develop:
+      watch:
+        - action: sync
+          path: ./
+          target: ./
+    ports:
+      - "8000:8080"
+    depends_on:
+      - redis
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - DJANGO_DEBUG=True
+      - DJANGO_SECRET_KEY=insecure-dev-only-key
+    volumes:
+      - backend_storage:/app/media
+      - backend_static:/app/staticfiles
+      - backend_data:/app/data
+    restart: always
+  
+  celery:
+    build: ./src
+    container_name: celery-worker
+    command: celery -A app worker --loglevel=info
+    volumes:
+      - .:/code
+      - backend_storage:/app/media
+    depends_on:
+      - redis
+      - backend
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    restart: always
+  
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ocr_analysis
+      POSTGRES_USER: ramkumarng
+      POSTGRES_PASSWORD: mypassword
+
+volumes:
+  backend_storage:
+  backend_static:
+  backend_data: 
