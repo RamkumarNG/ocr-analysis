@@ -37,7 +37,7 @@ A Django-based backend for document OCR analysis, outlier detection, and job man
 1. **Clone the repository:**
 
    ```sh
-   git clone <repo-url>
+   git clone https://github.com/RamkumarNG/ocr-analysis.git
    cd ocr-analysis
    ```
 2. **Build and start the services:**
