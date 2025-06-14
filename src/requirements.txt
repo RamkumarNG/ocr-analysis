@@ -1,0 +1,7 @@
+Django==4.2.11
+djangorestframework==3.14.0
+psycopg2-binary==2.9.9
+celery==5.3.6
+gunicorn==21.2.0
+redis==5.0.4
+importlib-metadata==4.13.0

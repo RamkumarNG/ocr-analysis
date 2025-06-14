@@ -1,0 +1,14 @@
+# Ignore bytecode and caches
+__pycache__/
+*.py[cod]
+
+# Ignore virtualenv
+venv/
+/src/venv/
+
+# Ignore system files
+.DS_Store
+.vscode/
+
+# Ignore env files
+.env
