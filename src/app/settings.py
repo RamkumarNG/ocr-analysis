@@ -47,6 +47,7 @@ PROJECT_APPS = [
 
 THIRD_PARTY_APPS = [
     "rest_framework",  # Framework for building Web APIs
+    "drf_spectacular", # For documentation APIs
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
@@ -62,6 +63,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'app.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
 
 TEMPLATES = [
     {

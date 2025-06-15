@@ -5,3 +5,4 @@ celery==5.3.6
 gunicorn==21.2.0
 redis==5.0.4
 importlib-metadata==4.13.0
+drf-spectacular==0.28.0
