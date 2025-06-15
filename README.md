@@ -31,6 +31,7 @@ A Django-based backend for document OCR analysis, outlier detection, and job man
 ### 🛠️ Prerequisites
 
 - Docker & Docker Compose
+- or colima installation -> refer: https://formulae.brew.sh/formula/colima
 
 ### ⚡ Quick Start
 
@@ -43,6 +44,7 @@ A Django-based backend for document OCR analysis, outlier detection, and job man
 2. **Build and start the services:**
 
    ```sh
+   colima start or docker-desktop
    docker-compose up --build
    ```
 3. **Access the API:**

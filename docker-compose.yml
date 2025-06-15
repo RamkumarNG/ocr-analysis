@@ -25,10 +25,16 @@ services:
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
       - DJANGO_DEBUG=True
       - DJANGO_SECRET_KEY=insecure-dev-only-key
+      - DB_HOST=db
+      - DB_PORT=5432
+      - POSTGRES_DB=ocr_analysis
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=mypassword
     volumes:
       - backend_storage:/app/media
       - backend_static:/app/staticfiles
       - backend_data:/app/data
+      - uploaded_files:/app/uploaded_files
     restart: always
   
   celery:
@@ -36,14 +42,20 @@ services:
     container_name: celery-worker
     command: celery -A app worker --loglevel=info
     volumes:
-      - .:/code
+      - ./src:/app
       - backend_storage:/app/media
+      - uploaded_files:/app/uploaded_files
     depends_on:
       - redis
       - backend
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - DB_HOST=db
+      - DB_PORT=5432
+      - POSTGRES_DB=ocr_analysis
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=mypassword
     restart: always
   
   db:
@@ -52,10 +64,11 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_DB: ocr_analysis
-      POSTGRES_USER: ramkumarng
+      POSTGRES_USER: user
       POSTGRES_PASSWORD: mypassword
 
 volumes:
   backend_storage:
   backend_static:
-  backend_data: 
+  backend_data:
+  uploaded_files:

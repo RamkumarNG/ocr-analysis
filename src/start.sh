@@ -6,7 +6,7 @@ chmod -R 777 /app/data
 
 # Run migrations
 echo "Running migrations..."
-python manage.py makemigrations
+python manage.py makemigrations  --verbosity 2
 python manage.py migrate
 
 echo "Running Scripts"
