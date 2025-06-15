@@ -83,11 +83,3 @@ def analyze_pdf_task(job_id):
         job.save()
         raise
 
-
-@shared_task
-def ping_test_task():
-    print("rocket started......")
-    import time
-    time.sleep(10)
-    print("rocket stopped......")
-
