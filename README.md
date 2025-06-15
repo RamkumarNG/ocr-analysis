@@ -51,6 +51,13 @@ A Django-based backend for document OCR analysis, outlier detection, and job man
 
    - The backend API will be available at [http://localhost:8000/api/v1/](http://localhost:8000/api/v1/)
 
+## API docs
+
+After running docker-compose up --build
+
+* Swagger UI: `http://localhost:8000/api/schema/swagger-ui/`
+* ReDoc UI: `http://localhost:8000/api/schema/redoc/`
+
 ## 📡 API Endpoints
 
 - `GET /api/v1/ping` — Health check
